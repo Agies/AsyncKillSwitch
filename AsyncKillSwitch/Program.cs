@@ -32,7 +32,7 @@ namespace AsyncKillSwitch
     public class FooService : IFooService
     {
         public static Random r = new Random();
-        public ConcurrentDictionary<Guid, ThreadWrapper> runningThreads = new ConcurrentDictionary<Guid, ThreadWrapper>();
+        public ConcurrentDictionary<Guid, ThreadWrapper> runningThreads;
 
         public Action Job = () => Thread.Sleep(new TimeSpan(0, r.Next(1, 5), 0));
         
@@ -43,6 +43,7 @@ namespace AsyncKillSwitch
 
         public void Start()
         {
+            runningThreads = new ConcurrentDictionary<Guid, ThreadWrapper>();
             var task = new Task(RunJobs);
             task.ContinueWith(t =>
                                   {
