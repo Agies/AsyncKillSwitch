@@ -1,0 +1,24 @@
+﻿<Window x:Class="Engage.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:engage="clr-namespace:Engage"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <engage:JobWatcherViewModel />
+    </Window.DataContext>
+    <Grid>
+        <DataGrid ItemsSource="{Binding Jobs}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Job Name" Binding="{Binding JobName}" />
+                <DataGridTextColumn Header="Thread Name" Binding="{Binding ThreadName}" />
+                <DataGridTextColumn Header="Elapsed" Binding="{Binding Elapsed}" />
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Kill It" Command="{Binding KillIt}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

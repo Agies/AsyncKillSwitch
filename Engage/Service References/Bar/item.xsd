@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/AsyncKillSwitch" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/AsyncKillSwitch" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="GetRunningThreadsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Threads" nillable="true" type="tns:ArrayOfThreadInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetRunningThreadsResponse" nillable="true" type="tns:GetRunningThreadsResponse" />
+  <xs:complexType name="ArrayOfThreadInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ThreadInfo" nillable="true" type="tns:ThreadInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfThreadInfo" nillable="true" type="tns:ArrayOfThreadInfo" />
+  <xs:complexType name="ThreadInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExecutionTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="JobName" type="ser:guid" />
+      <xs:element minOccurs="0" name="ThreadName" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ThreadInfo" nillable="true" type="tns:ThreadInfo" />
+  <xs:complexType name="KillRunningThreadRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="JobName" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="KillRunningThreadRequest" nillable="true" type="tns:KillRunningThreadRequest" />
+</xs:schema>
